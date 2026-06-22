@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="منصة ذكية للمحادثات الفورية والمكالمات الصوتية المباشرة مع مساعدك الشخصي NovaAI.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .auth-container {
+            background-color: #151c2c;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            color: #f3f4f6;
+            text-align: right;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; left: 15px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 24px;
+            line-height: 1;
+        }
+        .close-modal:hover { color: white; }
+
+        .auth-container h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .auth-input {
+            width: 100%;
+            background-color: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+            text-align: right;
+        }
+
+        .auth-input:focus { border-color: #6366f1; }
+
+        .auth-btn {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+        .auth-btn:hover { opacity: 0.9; }
+
+        .auth-toggle {
+            font-size: 13px;
+            color: #9ca3af;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">Nova<span>AI</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
+                    <li><a href="services.html">الخدمات</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>شكّل المستقبل باستخدام <br><span>الذكاء الاصطناعي</span></h1>
+            <p>نحن نقدم حلولاً ذكية ومبتكرة لتطوير أعمالك وأتمتة عملياتك اليومية بأحدث تقنيات التعلم الآلي.</p>
+            <div class="hero-buttons">
+                <button onclick="openAuthModal()" class="btn btn-primary" style="border:none; cursor:pointer;">ابدأ الآن 🚀</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">خدماتنا الذكية</h2>
+            <div class="services-grid">
+                
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>تحليل البيانات الذكي</h3>
+                    <p>تحويل البيانات الضخمة إلى رؤى استراتيجية واضحة لدعم اتخاذ القرار.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>التعلم الآلي المتطور</h3>
+                    <p>بناء نماذج مخصصة تتنبأ بسلوك المستخدمين وتزيد من كفاءة العمل.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>مساعدو الدردشة (Chatbots)</h3>
+                    <p>أنظمة خدمة عملاء فورية وذكية تعمل على مدار الساعة للإجابة على الاستفسارات.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-container">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            <h3 id="authTitle">تسجيل الدخول إلى NovaAI</h3>
+            <input type="text" id="authName" class="auth-input" placeholder="الاسم الكامل" style="display: none;">
+            <input type="email" id="authEmail" class="auth-input" placeholder="البريد الإلكتروني">
+            <input type="password" id="authPass" class="auth-input" placeholder="كلمة المرور">
+            <button class="auth-btn" id="authSubmitBtn" onclick="handleAuth()">دخول الآن</button>
+            <div class="auth-toggle" id="authToggle" onclick="toggleAuthMode()">ليس لديك حساب؟ إنشاء حساب جديد</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 جميع الحقوق محفوظة لموقع AI. تم التصميم بكل ذكاء.</p>
+    </footer>
+
+    <script>
+        let isSignUpMode = false;
+
+        function openAuthModal() {
+            // إذا كان المستخدم قد سجل دخوله مسبقاً ولم يقم بعمل تسجيل خروج، يتم نقله فوراً لصفحة الذكاء الاصطناعي
+            if (localStorage.getItem('nova_current_user')) {
+                window.location.href = "ai.html";
+            } else {
+                document.getElementById('authModal').style.display = "flex";
+            }
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = "none";
+        }
+
+        function toggleAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            const nameInput = document.getElementById('authName');
+            const title = document.getElementById('authTitle');
+            const btn = document.getElementById('authSubmitBtn');
+            const toggleText = document.getElementById('authToggle');
+
+            if (isSignUpMode) {
+                title.innerText = "إنشاء حساب جديد";
+                nameInput.style.display = "block";
+                btn.innerText = "تسجيل الحساب";
+                toggleText.innerText = "لديك حساب بالفعل؟ تسجيل الدخول";
+            } else {
+                title.innerText = "تسجيل الدخول إلى NovaAI";
+                nameInput.style.display = "none";
+                btn.innerText = "دخول الآن";
+                toggleText.innerText = "ليس لديك حساب؟ إنشاء حساب جديد";
+            }
+        }
+
+        function handleAuth() {
+            const name = document.getElementById('authName').value.trim();
+            const email = document.getElementById('authEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('authPass').value.trim();
+
+            if (!email || !pass || (isSignUpMode && !name)) {
+                alert("يرجى تعبئة كافة البيانات المطلوبة.");
+                return;
+            }
+
+            let registeredUsers = JSON.parse(localStorage.getItem('nova_registered_users')) || {};
+
+            if (isSignUpMode) {
+                if (registeredUsers[email]) {
+                    alert("هذا البريد الإلكتروني مسجل مسبقاً!");
+                    return;
+                }
+                // حفظ بيانات الحساب الجديد بشكل منفصل
+                registeredUsers[email] = { name: name, pass: pass };
+                localStorage.setItem('nova_registered_users', JSON.stringify(registeredUsers));
+                localStorage.setItem('nova_current_user', JSON.stringify({ email: email, name: name }));
+            } else {
+                // التحقق من صحة بيانات الحساب الفردي
+                if (!registeredUsers[email] || registeredUsers[email].pass !== pass) {
+                    alert("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+                    return;
+                }
+                localStorage.setItem('nova_current_user', JSON.stringify({ email: email, name: registeredUsers[email].name }));
+            }
+
+            // الانتقال الفوري لصفحة الشات بعد التوثيق الناجح
+            window.location.href = "ai.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - منصة Nova AI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- إضافة خطوط جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- شريط التنقل (Navbar) -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">Nova<span>AI</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="services.html">الخدمات</a></li>
+                    <li><a href="contact.html" class="active">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- قسم عنوان الصفحة (Page Header) -->
+    <section class="page-header">
+        <div class="container">
+            <h1>تواصل معنا</h1>
+            <p>هل لديك استفسار أو ترغب في تطوير حل ذكاء اصطناعي مخصص لأعمالك؟ فريقنا جاهز لمساعدتك.</p>
+        </div>
+    </section>
+
+    <!-- قسم محتوى الاتصال (Contact Content) -->
+    <section class="contact-section">
+        <div class="container contact-container">
+            
+            <!-- أولاً: معلومات الاتصال السريعة -->
+            <div class="contact-info">
+                <h3>معلومات الاتصال</h3>
+                <p class="info-desc">يمكنك الوصول إلينا مباشرة عبر القنوات التالية:</p>
+                
+                <div class="info-item">
+                    <span class="info-icon">📧</span>
+                    <div>
+                        <h4>البريد الإلكتروني</h4>
+                        <p>info@ai-platform.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📱</span>
+                    <div>
+                        <h4>الدعم الفني والواتساب</h4>
+                        <p>+059 425 7472</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <h4>المقر الرئيسي</h4>
+                        <p>طولكرم,فلسيطين الضفه الغربية</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ثانياً: نموذج إرسال الرسائل (Form) -->
+            <div class="contact-form-container">
+<!-- نموذج إرسال الرسائل المرتبط بحسابك في Formspree -->
+<form class="contact-form" action="https://formspree.io/f/mwvdedny" method="POST">
+    <div class="form-group">
+        <label for="name">الاسم الكامل</label>
+        <input type="text" id="name" name="الاسم" placeholder="أدخل اسمك الكريم" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" name="البريد_الإلكتروني" placeholder="name@example.com" required>
+    </div>
+
+    <div class="form-group">
+        <label for="subject">الموضوع</label>
+        <input type="text" id="subject" name="الموضوع" placeholder="ما هو موضوع رسالتك؟" required>
+    </div>
+
+    <div class="form-group">
+        <label for="message">الرسالة</label>
+        <textarea id="message" name="الرسالة" rows="5" placeholder="اكتب تفاصيل رسالتك هنا..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">إرسال الرسالة ✨</button>
+</form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer>
+        <p>&copy; 2026 جميع الحقوق محفوظة لموقع AI. تم التصميم بكل ذكاء.</p>
+    </footer>
+
+</body>
+</html>
