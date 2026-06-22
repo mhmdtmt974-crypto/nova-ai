@@ -473,33 +473,32 @@
         let isCallActive = false;
         let shouldKeepListening = false;
 
-        window.onload = function() {
-            if (!currentUser) {
-                window.location.href = "index.html";
-                return;
-            }
-            document.getElementById('userBadge').innerHTML = `مرحباً، <strong>${currentUser.name}</strong>`;
-            
-            userChats = JSON.parse(localStorage.getItem(`chats_${currentUser.email}`)) || {};
-            currentChatId = localStorage.getItem(`current_id_${currentUser.email}`) || "";
+window.onload = function() {
+    // إذا لم يجد مستخدم مسجل، سيضع اسماً افتراضياً بدلاً من إخفاء القائمة أو الخروج
+    if (!currentUser) {
+        currentUser = { name: "البطل", email: "guest@nova.ai" };
+    }
+    document.getElementById('userBadge').innerHTML = `مرحباً، <strong>${currentUser.name}</strong>`;
+    
+    userChats = JSON.parse(localStorage.getItem(`chats_${currentUser.email}`)) || {};
+    currentChatId = localStorage.getItem(`current_id_${currentUser.email}`) || "";
 
-            const savedAbout = localStorage.getItem(`about_${currentUser.email}`) || "";
-            document.getElementById('aboutMeText').value = savedAbout;
+    const savedAbout = localStorage.getItem(`about_${currentUser.email}`) || "";
+    document.getElementById('aboutMeText').value = savedAbout;
 
-            if (Object.keys(userChats).length === 0 || !currentChatId) {
-                startNewChat();
-            } else {
-                renderSidebar();
-                loadChat(currentChatId);
-            }
+    if (Object.keys(userChats).length === 0 || !currentChatId) {
+        startNewChat();
+    } else {
+        renderSidebar();
+        loadChat(currentChatId);
+    }
 
-            initSpeechRecognition();
-            
-            if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
-                speechSynthesis.onvoiceschanged = () => {};
-            }
-        };
-
+    initSpeechRecognition();
+    
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = () => {};
+    }
+};
         function toggleAboutMePanel() {
             const panel = document.getElementById('aboutMeContent');
             const arrow = document.getElementById('aboutArrow');
